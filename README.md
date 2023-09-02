@@ -47,8 +47,7 @@ The Student Management System is designed to ease the process of managing studen
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/student-management-system.git
-   cd student-management-system
+   git clone https://github.com/Murli0399/Platform-Commons.git
 
 
 ## Usage
