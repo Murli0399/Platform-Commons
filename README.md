@@ -49,3 +49,18 @@ The Student Management System is designed to ease the process of managing studen
    ```bash
    git clone https://github.com/yourusername/student-management-system.git
    cd student-management-system
+
+
+## Usage
+1. Access the application through your web browser.
+
+2. Admin Login:
+- URL: http://localhost:8080/login
+- Username: admin
+- Password: adminpass
+
+3. Student Validation:
+- Students can validate themselves using their student code and date of birth.
+
+## API Documentation
+- API documentation (e.g., Swagger) can be added here to provide detailed information about the available endpoints and how to use them.
