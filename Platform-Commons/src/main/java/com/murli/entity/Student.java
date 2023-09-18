@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,9 +20,11 @@ public class Student {
 	private String name;
 	private LocalDate dateOfBirth;
 	private String gender;
+
+	@Column(unique = true)
 	private String uniqueStudentCode;
 
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
 	private List<StudentAddress> addresses;
 
 	@ManyToMany(mappedBy = "students")

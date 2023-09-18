@@ -5,21 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.murli.dto.CourseDTO;
 import com.murli.dto.StudentDTO;
-import com.murli.dto.StudentValidationRequest;
 import com.murli.service.StudentService;
 
+
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/student")
 public class StudentController {
 
 	@Autowired
@@ -29,23 +29,19 @@ public class StudentController {
 	public ResponseEntity<StudentDTO> updateStudentProfile(@PathVariable Integer studentId,
 			@RequestBody StudentDTO studentDTO) {
 		StudentDTO updatedStudent = ss.updateStudentProfile(studentId, studentDTO);
-		return ResponseEntity.ok(updatedStudent);
+		return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
 	}
 
-	@GetMapping("/search")
-	public ResponseEntity<List<StudentDTO>> getStudentsByName(@RequestParam String name) {
-		List<StudentDTO> students = ss.getStudentsByName(name);
-		return ResponseEntity.ok(students);
+	@GetMapping("/courses/{studentId}")
+	public ResponseEntity<List<CourseDTO>> coursesByStudentId(@PathVariable Integer studentId) {
+		List<CourseDTO> courseDTO = ss.coursesByStudentId(studentId);
+		return new ResponseEntity<>(courseDTO, HttpStatus.OK);
 	}
 
-	@PostMapping("/validate")
-	public ResponseEntity<?> validateStudent(@RequestBody StudentValidationRequest validationRequest) {
-		boolean isValid = ss.validateStudent(validationRequest.getStudentCode(), validationRequest.getDateOfBirth());
-
-		if (isValid) {
-			return ResponseEntity.ok("Student validation successful!");
-		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid student credentials");
-		}
+	@DeleteMapping("/{studentId}/courses/{courseId}")
+	public ResponseEntity<String> leaveCourse(@PathVariable Integer studentId, @PathVariable Integer courseId) {
+		ss.leaveCourse(studentId, courseId);
+		return new ResponseEntity<>("Leave Success", HttpStatus.OK);
 	}
+
 }
