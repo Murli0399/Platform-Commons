@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PlatformCommonsApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(PlatformCommonsApplication.class, args);
+		System.out.println("applicatiom......");
 	}
 
 }
